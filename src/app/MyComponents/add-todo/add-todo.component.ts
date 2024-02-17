@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Todo } from '../../Todo';
 
 @Component({
   selector: 'app-add-todo',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrl: './add-todo.component.css'
 })
 export class AddTodoComponent {
+  title: string = "";
+  desc: string = "";
+  @Output() todoAdd: EventEmitter<Todo> = new EventEmitter();
+  sno: any;
+
+  onSubmit() {
+    const todo: Todo = {
+      sno: this.sno++,
+      title: this.title,
+      desc: this.desc,
+      active: true
+    }
+    this.todoAdd.emit(todo);
+  }
 
 }
